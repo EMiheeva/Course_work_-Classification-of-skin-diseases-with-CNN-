@@ -165,12 +165,10 @@ Y_cat = to_categorical(Y, num_classes=7) #Преобразовать в кате
 # Разделение на данные для обучения(train) и тестирования(test) с помощью функции train_test_split
 x_train, x_test, y_train, y_test = train_test_split(X, Y_cat, test_size=0.25, random_state=42)
 
-#Определение модели.
-#Мы использовали automakers чтобы найти наилучшую модель для решения поставленной задачи классификации.
-
+# Определение модели
 num_classes = 7
 
-model = Sequential()
+model = Sequential() 
 model.add(Conv2D(256, (3, 3), activation="relu", input_shape=(SIZE, SIZE, 3)))
 #model.add(BatchNormalization())
 model.add(MaxPool2D(pool_size=(2, 2)))  
@@ -194,7 +192,7 @@ model.summary()
 model.compile(loss='categorical_crossentropy', optimizer='Adam', metrics=['acc'])
 
 
-# Тренируем модель.
+# Тренируем модель
 batch_size = 16 
 epochs = 50
 
@@ -211,14 +209,14 @@ print('Результат [Test accuracy]:', score[1])
 print()
 
 
-# Построим график точности обучения и валидации и потерь в каждую эпоху.
+# Построим график точности обучения и валидации и потерь в каждую эпоху
 loss = history.history['loss']
 val_loss = history.history['val_loss']
 epochs = range(1, len(loss) + 1)
 plt.plot(epochs, loss, 'b', label='Потери обучения')
 plt.plot(epochs, val_loss, 'g', label='Потери валидации')
 plt.title('Потери обучения и валидации')
-plt.xlabel('Эпохи') # Полная итерация алгоритма над обучающим набором данных.
+plt.xlabel('Эпохи') # Полная итерация алгоритма над обучающим набором данных
 plt.ylabel('Потери') 
 plt.legend()
 plt.show()
